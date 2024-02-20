@@ -6,10 +6,11 @@ from abc import ABC , abstractmethod
 
 current_time = datetime.now().strftime('%A:%H:%M')
 
-#reading csv files using pandas 
-df = pandas.read_csv("hotels.csv", dtype={'id': str})
-df_cards = pandas.read_csv("cards.csv", dtype=str).to_dict(orient="records")
-df_card_security = pandas.read_csv("card_security.csv", dtype=str)
+#reading csv files using pandas
+#? adjustment to file path to pull from a spot in the cotainer
+df = pandas.read_csv("/usr/src/app/data/hotels.csv", dtype={'id': str})
+df_cards = pandas.read_csv("/usr/src/app/data/cards.csv", dtype=str).to_dict(orient="records")
+df_card_security = pandas.read_csv("/usr/src/app/data/card_security.csv", dtype=str)
 
 
 
@@ -33,7 +34,7 @@ class Hotel:
     def book(self):
         #book a hotel by changing its availability to no
         df.loc[df["id"] == self.hotel_id, "available"] = "no"
-        df.to_csv("hotels.csv", index=False)
+        df.to_csv("/usr/src/app/data/hotels.csv", index=False)
 
 
 class Ticket(ABC):
